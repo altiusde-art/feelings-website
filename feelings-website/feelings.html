@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Glimpse of You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #061824;
+    color: #f1f7fa;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+.page {
+    min-height: 100svh;
+    padding: 65px 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 50% 20%, #17465b 0%, transparent 55%),
+        linear-gradient(145deg, #061824, #0b293b, #071b29);
+}
+
+.page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 15% 30%, rgba(62,190,220,.12), transparent 45%),
+        radial-gradient(ellipse at 85% 70%, rgba(39,145,190,.13), transparent 45%);
+    pointer-events: none;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.top-label {
+    color: #8bd9e9;
+    font-size: 9px;
+    letter-spacing: 5px;
+    margin-bottom: 35px;
+}
+
+.image-box {
+    width: 100%;
+    max-width: 380px;
+    height: 220px;
+    margin: 0 auto 35px;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 1px solid rgba(135,220,240,.4);
+    box-shadow: 0 10px 45px rgba(0,0,0,.3);
+    opacity: 0;
+    animation: imageReveal 1.7s ease forwards;
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 9vw, 42px);
+    font-weight: 400;
+    color: #d9f5fa;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: rise 1.2s ease 1.5s forwards;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.line {
+    min-height: 30px;
+    color: #e5f1f5;
+    font-size: 13px;
+    line-height: 2.1;
+    font-weight: 300;
+    letter-spacing: .3px;
+    text-shadow: 0 2px 10px rgba(0,0,0,.4);
+    white-space: pre-line;
+}
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 14px;
+    background: #80d9eb;
+    margin-left: 3px;
+    animation: blink .7s infinite;
+    vertical-align: middle;
+}
+
+.footer {
+    color: #76b9c8;
+    font-size: 9px;
+    letter-spacing: 3px;
+    margin-top: 48px;
+}
+
+.heart {
+    position: absolute;
+    bottom: -30px;
+    color: #64d7ec;
+    opacity: 0;
+    pointer-events: none;
+    animation: floatHeart linear infinite;
+    text-shadow: 0 0 12px #35c9e7;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(.7);
+        opacity: 0;
+    }
+    20% { opacity: .6; }
+    80% { opacity: .35; }
+    100% {
+        transform: translateY(-110vh) rotate(35deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
+.bubble {
+    position: absolute;
+    bottom: -20px;
+    border: 1px solid rgba(126,220,240,.4);
+    border-radius: 50%;
+    animation: floatBubble linear infinite;
+    pointer-events: none;
+}
+
+@keyframes floatBubble {
+    from {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    20% { opacity: .5; }
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+
+
+/* NEXT PAGE BUTTON */
+.next-wrap {
+    margin-top: 38px;
+    display: flex;
+    justify-content: center;
+}
+
+.next-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    color: #c9f4fb;
+    text-decoration: none;
+    border: 1px solid rgba(135,220,240,.55);
+    border-radius: 30px;
+    background: rgba(12,44,59,.45);
+    font-size: 10px;
+    letter-spacing: 3px;
+    transition: background .3s ease, transform .3s ease, box-shadow .3s ease;
+}
+
+.next-btn:hover {
+    background: rgba(44,133,157,.35);
+    transform: translateY(-3px);
+    box-shadow: 0 0 22px rgba(80,210,235,.18);
+}
+
+@keyframes imageReveal {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+@media (max-width: 480px) {
+    .page {
+        padding: 50px 23px;
+    }
+    .image-box {
+        height: 190px;
+    }
+    .line {
+        font-size: 13px;
+    }
+    .final-line {
+        font-size: 23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="page" id="page">
+    <div class="container">
+        <div class="top-label">YOUR EYES</div>
+
+        <div class="image-box">
+            <img src="images/eyes.jpg" alt="Her eyes">
+        </div>
+
+        <h1 class="heading">
+            There's Something About Your Eyes That Leaves Me Mesmerized...
+        </h1>
+
+        <div class="messages" id="messages">
+            <p class="line" data-text="I can't explain this, how your eyes look. Jodi kono flirting typer bornona dite jai, tahole eita kono movie ba natok-cinema, jekono ektar script er sathe mile jabe. Ar ami flirting korte chai nah, just bolte chai, tumar chokher dike takale onnorokom feel hoy. Eita kemon, I don't know. Jokhon ami tumar cokher dike takai amar heartbeat bere jay"></p>
+        </div>
+
+        <div class="footer">SOME FEELINGS ARE HARD TO EXPLAIN</div>
+
+        <div class="next-wrap">
+            <a class="next-btn" href="memories.html">NEXT PAGE&nbsp; →</a>
+        </div>
+    </div>
+</section>
+
+<!-- Background music: no sound on/off button -->
+<audio id="backgroundMusic" loop preload="auto">
+    <source src="music/background.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* BACKGROUND MUSIC
+   This page tries to continue from the time saved by the previous page.
+   If the browser blocks autoplay, the first tap/click starts it.
+*/
+const music = document.getElementById("backgroundMusic");
+const MUSIC_TIME_KEY = "feelingsMusicTime";
+const MUSIC_PLAY_KEY = "feelingsMusicPlaying";
+
+music.volume = 0.4;
+
+async function startBackgroundMusic() {
+    const savedTime = Number(sessionStorage.getItem(MUSIC_TIME_KEY) || 0);
+
+    if (music.readyState >= 1 && savedTime > 0 &&
+        Number.isFinite(savedTime) && savedTime < music.duration) {
+        music.currentTime = savedTime;
+    }
+
+    try {
+        await music.play();
+        sessionStorage.setItem(MUSIC_PLAY_KEY, "yes");
+    } catch (error) {
+        // Browser autoplay restriction: start on the first user interaction.
+    }
+}
+
+function saveMusicPosition() {
+    if (!music.paused) {
+        sessionStorage.setItem(MUSIC_PLAY_KEY, "yes");
+    }
+    sessionStorage.setItem(MUSIC_TIME_KEY, String(music.currentTime || 0));
+}
+
+window.addEventListener("pagehide", saveMusicPosition);
+music.addEventListener("loadedmetadata", startBackgroundMusic);
+startBackgroundMusic();
+
+function resumeMusicAfterInteraction() {
+    if (music.paused) {
+        music.play().then(() => {
+            sessionStorage.setItem(MUSIC_PLAY_KEY, "yes");
+        }).catch(() => {});
+    }
+}
+
+document.addEventListener("pointerdown", resumeMusicAfterInteraction, { once: true });
+document.addEventListener("keydown", resumeMusicAfterInteraction, { once: true });
+
+/* KEYBOARD TYPING SOUND */
+let audioContext = null;
+
+function initTypingSound() {
+    if (!audioContext) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) {
+            audioContext = new AudioContextClass();
+        }
+    }
+
+    if (audioContext && audioContext.state === "suspended") {
+        audioContext.resume();
+    }
+}
+
+document.addEventListener("pointerdown", initTypingSound, { once: true });
+document.addEventListener("keydown", initTypingSound, { once: true });
+
+function typingSound() {
+    if (!audioContext || audioContext.state !== "running") return;
+
+    const duration = 0.025;
+    const buffer = audioContext.createBuffer(
+        1,
+        Math.floor(audioContext.sampleRate * duration),
+        audioContext.sampleRate
+    );
+
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < data.length; i++) {
+        data[i] = Math.random() * 2 - 1;
+    }
+
+    const source = audioContext.createBufferSource();
+    const filter = audioContext.createBiquadFilter();
+    const gain = audioContext.createGain();
+
+    source.buffer = buffer;
+    filter.type = "highpass";
+    filter.frequency.value = 1500;
+
+    gain.gain.setValueAtTime(0.045, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        audioContext.currentTime + duration
+    );
+
+    source.connect(filter);
+    filter.connect(gain);
+    gain.connect(audioContext.destination);
+    source.start();
+}
+
+/* CONTINUOUS TYPING ANIMATION */
+const lines = document.querySelectorAll(".line");
+const typingSpeed = 38;
+const paragraphDelay = 450;
+
+async function typeText(element, text) {
+    const cursor = document.createElement("span");
+    cursor.className = "cursor";
+    element.appendChild(cursor);
+
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        element.insertBefore(document.createTextNode(char), cursor);
+
+        if (char !== " " && char !== "," && char !== ".") {
+            typingSound();
+        }
+
+        await new Promise(resolve => setTimeout(resolve, typingSpeed));
+    }
+
+    cursor.remove();
+}
+
+async function startTyping() {
+    await new Promise(resolve => setTimeout(resolve, 3300));
+
+    for (const line of lines) {
+        await typeText(line, line.dataset.text || "");
+        await new Promise(resolve => setTimeout(resolve, paragraphDelay));
+    }
+}
+
+/* FLOATING HEARTS */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = "♥";
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.fontSize = (10 + Math.random() * 13) + "px";
+    heart.style.animationDuration = (7 + Math.random() * 7) + "s";
+
+    document.getElementById("page").appendChild(heart);
+    setTimeout(() => heart.remove(), 15000);
+}
+setInterval(createHeart, 850);
+
+/* FLOATING OCEAN BUBBLES */
+function createBubble() {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+
+    const size = 5 + Math.random() * 13;
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+    bubble.style.left = Math.random() * 100 + "%";
+    bubble.style.animationDuration = (8 + Math.random() * 8) + "s";
+
+    document.getElementById("page").appendChild(bubble);
+    setTimeout(() => bubble.remove(), 17000);
+}
+setInterval(createBubble, 700);
+
+/* START TYPING */
+window.addEventListener("load", startTyping);
+</script>
+
+</body>
+</html>

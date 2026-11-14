@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Memories</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    color: #f7f4f1;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    background: #101820;
+}
+
+.page {
+    min-height: 100svh;
+    width: 100%;
+    padding: 70px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+        linear-gradient(rgba(5, 13, 20, .22), rgba(5, 13, 20, .34)),
+        url("images/memories-bg.jpg") center center / cover no-repeat;
+}
+
+.page::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(ellipse at center, rgba(30, 75, 90, .12), transparent 70%);
+}
+
+.content {
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 28px 24px;
+    background: rgba(5, 15, 22, .12);
+    border: 1px solid rgba(220, 235, 240, .12);
+    backdrop-filter: blur(0px);
+}
+
+.eyebrow {
+    color: #c2dce3;
+    font-size: 9px;
+    letter-spacing: 5px;
+    margin-bottom: 22px;
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(36px, 8vw, 54px);
+    line-height: 1.12;
+    color: #fff8f0;
+    margin-bottom: 30px;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.message {
+    min-height: 25px;
+    color: #f2f0ed;
+    font-size: 13px;
+    line-height: 2;
+    font-weight: 300;
+    letter-spacing: .25px;
+    text-shadow: 0 2px 12px rgba(0,0,0,.75);
+    white-space: pre-line;
+}
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 14px;
+    margin-left: 3px;
+    vertical-align: middle;
+    background: #d8eef2;
+    animation: blink .7s infinite;
+}
+
+.next-wrap {
+    margin-top: 38px;
+}
+
+.next-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 1px solid rgba(225, 240, 244, .65);
+    border-radius: 30px;
+    color: #fff;
+    background: rgba(15, 34, 43, .45);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 3px;
+    transition: .3s ease;
+}
+
+.next-btn:hover {
+    background: rgba(210, 230, 235, .18);
+    transform: translateY(-3px);
+    box-shadow: 0 0 22px rgba(210, 235, 245, .18);
+}
+
+.footer {
+    margin-top: 35px;
+    color: rgba(230, 240, 242, .75);
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+@media (max-width: 480px) {
+    .page { padding: 45px 16px; }
+    .content { padding: 24px 17px; }
+    .message { font-size: 12px; }
+}
+</style>
+</head>
+
+<body>
+<section class="page">
+    <main class="content">
+        <div class="eyebrow">THINGS I NEVER TOLD YOU</div>
+
+        <h1>Just so you know...</h1>
+
+        <div class="messages">
+            <!-- Replace these sample lines with your own message whenever you want. -->
+            <p class="message" data-text="I know it's annoying for you, but I just wanna let you know,
+You are gorgeous in my eyes.
+
+Ami tumar ID te din a koyekbari dhuki, tumar post dekhi, tumi kono instant ba story diso kina oita bar bar dhuke check kori. Keno kori jani nah, but valo lage.
+Tumi hoyto kheyal o koro nai, amar story, amar Instagram notes, amar close friends list e ekjon ache, oita tumi. Ami ja share kortam,je notes gula share kortam, shobi tumar jonno chilo. But I know you didn't notice, ar eita shabhabiko.
+Protek exam er din ami tumake khujchi, onek bar edik-odik takaisi, just dekhar jonnoi. Dekha hole je tumake hii bolbo, ei shahosh to naii.
+Even jokhon 3rd exam e tumake dekhi mbl joma rakhar desk er oikhane, tumi kheyal korso kina jani nah, but tumar chokhe chokh rakhar moto shahosh tukuo chilo nah. But ami tumar dike onek bar takaisi.
+Tokhon bhitore kemon feel hochhilo, I can't explain.amar nissash nite kosto hocchilo, oidin 2 ghontay ami ber hoiye jai exam diteo valo
+ laghtesilo nah aro 2 ghonta daraiya chilam bahire, last a emon jayghay daraisi virer majhe jate ami dekhte pari tumay kintu tumi na dekho amay,
+  ekebare sesher dike tumi namso, tarpor friend der sathe chole gela,ami pore park er oidike gesilam, jantam tumi hoyto thakba nah but bar
+   bar eidik oidik takacchilam, jani dekhbo nah tumay tarporeo,ei koidin a ei ovvesh hoiye gese oikhane gelei tumake khuji..  
+Tumar just ekta reacto amar mon valo kore dey. Overall, tumar theke jekono kichhui amar valo lage.jani nah keno"></p>
+            
+
+        <div class="next-wrap">
+            <a class="next-btn" href="lastpage.html">NEXT PAGE&nbsp; →</a>
+        </div>
+
+        <div class="footer">SOMETHING I FEEL ABOUT YOU</div>
+    </main>
+</section>
+
+<!-- Keep the same music file and session keys used on feelings.html -->
+<audio id="backgroundMusic" loop preload="auto">
+    <source src="music/background.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* RESUME MUSIC FROM THE PREVIOUS PAGE */
+const music = document.getElementById("backgroundMusic");
+const MUSIC_TIME_KEY = "feelingsMusicTime";
+const MUSIC_PLAY_KEY = "feelingsMusicPlaying";
+
+music.volume = 0.4;
+
+async function resumeBackgroundMusic() {
+    const savedTime = Number(sessionStorage.getItem(MUSIC_TIME_KEY) || 0);
+
+    if (music.readyState >= 1 &&
+        Number.isFinite(savedTime) &&
+        savedTime >= 0 &&
+        savedTime < music.duration) {
+        music.currentTime = savedTime;
+    }
+
+    try {
+        await music.play();
+        sessionStorage.setItem(MUSIC_PLAY_KEY, "yes");
+    } catch (error) {
+        // Browser autoplay may be blocked. The first tap/click will start it.
+    }
+}
+
+function saveMusicPosition() {
+    if (!music.paused) {
+        sessionStorage.setItem(MUSIC_PLAY_KEY, "yes");
+    }
+    sessionStorage.setItem(MUSIC_TIME_KEY, String(music.currentTime || 0));
+}
+
+window.addEventListener("pagehide", saveMusicPosition);
+music.addEventListener("loadedmetadata", resumeBackgroundMusic);
+resumeBackgroundMusic();
+
+function startMusicOnInteraction() {
+    if (music.paused) {
+        music.play().then(() => {
+            sessionStorage.setItem(MUSIC_PLAY_KEY, "yes");
+        }).catch(() => {});
+    }
+}
+document.addEventListener("pointerdown", startMusicOnInteraction, { once: true });
+document.addEventListener("keydown", startMusicOnInteraction, { once: true });
+
+/* MEDIUM-FAST TYPING EFFECT */
+const messages = document.querySelectorAll(".message");
+const typingSpeed = 32;
+const pauseBetweenParagraphs = 500;
+
+function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function typeMessage(element, text) {
+    const cursor = document.createElement("span");
+    cursor.className = "cursor";
+    element.appendChild(cursor);
+
+    for (const character of text) {
+        element.insertBefore(document.createTextNode(character), cursor);
+        await wait(typingSpeed);
+    }
+
+    cursor.remove();
+}
+
+async function startTyping() {
+    await wait(900);
+
+    for (const message of messages) {
+        await typeMessage(message, message.dataset.text || "");
+        await wait(pauseBetweenParagraphs);
+    }
+}
+
+window.addEventListener("load", startTyping);
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Apology</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;color:#fffaf5;font-family:'Inter',sans-serif;overflow-x:hidden;background:#211b1a}
+.page{
+ min-height:100svh;width:100%;padding:70px 22px;display:flex;align-items:center;justify-content:center;
+ position:relative;isolation:isolate;overflow:hidden;
+ background:linear-gradient(rgba(24,16,15,.25),rgba(24,16,15,.38)),url("images/sorry-bg.jpg") center center/cover no-repeat;
+}
+.content{width:100%;max-width:650px;text-align:center;position:relative;z-index:2;padding:30px 25px;background:rgba(25,18,17,.13);border:1px solid rgba(255,242,230,.18);backdrop-filter:blur(0px)}
+.eyebrow{color:#ead2c3;font-size:9px;letter-spacing:5px;margin-bottom:22px}
+h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(38px,8vw,58px);line-height:1.1;color:#fff6ee;margin-bottom:20px;text-shadow:0 2px 18px rgba(0,0,0,.35)}
+.subtitle{color:#f1e2d8;font-size:12px;line-height:1.9;font-weight:300;margin-bottom:34px;text-shadow:0 2px 12px rgba(0,0,0,.65)}
+.messages{display:flex;flex-direction:column;gap:24px;min-height:150px}
+.message{min-height:30px;color:#fffaf5;font-size:13px;line-height:2.1;font-weight:300;letter-spacing:.2px;text-shadow:0 2px 12px rgba(0,0,0,.8);white-space:pre-line}
+.cursor{display:inline-block;width:2px;height:14px;margin-left:3px;vertical-align:middle;background:#f2d4c2;animation:blink .7s infinite}
+.next-wrap{margin-top:38px}
+.next-btn{display:inline-block;padding:12px 29px;border:1px solid rgba(255,238,225,.7);border-radius:30px;color:#fffaf5;background:rgba(40,27,24,.35);text-decoration:none;font-size:10px;letter-spacing:3px;transition:.3s ease}
+.next-btn:hover{background:rgba(255,238,225,.15);transform:translateY(-3px);box-shadow:0 0 22px rgba(255,225,205,.15)}
+.footer{margin-top:32px;color:rgba(255,236,222,.8);font-size:9px;letter-spacing:3px}
+@keyframes blink{50%{opacity:0}}
+@media(max-width:480px){.page{padding:45px 16px}.content{padding:25px 17px}.message{font-size:12px}}
+</style>
+</head>
+<body>
+<section class="page">
+ <main class="content">
+  <div class="eyebrow">FROM THE BOTTOM OF MY HEART</div>
+  <h1>I'm Sorry...</h1>
+ 
+
+  <!-- নিজের apology লিখবে নিচের data-text="" এর quotation-এর মধ্যে -->
+  <div class="messages">
+   <p class="message" data-text="Oidiner oi react er jonne sorry ami ei react friendly use kori, eita amar kache friendly laghe, 
+   amar mone onno kichu chilo nah,
+    ami just emnitei dichi, konorokom chinta vabna chara,amar vaba uchit chilo,
+    ei bishoyta amar onek khrap laghse jea ami tumake embarrassed korsi, i really sorry about that,
+   ar tumake jekono vabe birokto kore thakle."></p>
+   <p class="message" data-text=""></p>
+   <p class="message" data-text=""></p>
+  </div>
+
+  <div class="next-wrap">
+   <a class="next-btn" href="finalpage.html">NEXT PAGE&nbsp; →</a>
+  </div>
+  <div class="footer">I HOPE YOU CAN UNDERSTAND</div>
+ </main>
+</section>
+
+<audio id="backgroundMusic" loop preload="auto">
+ <source src="music/background.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* PREVIOUS PAGE THE SAME SESSION MUSIC POSITION SAVE KORE; EI PAGE SETA RESUME KORBE */
+const music=document.getElementById("backgroundMusic");
+const TIME_KEY="feelingsMusicTime";
+const PLAY_KEY="feelingsMusicPlaying";
+music.volume=0.4;
+
+function restoreMusicTime(){
+ const saved=Number(sessionStorage.getItem(TIME_KEY)||0);
+ if(Number.isFinite(saved)&&saved>=0&&saved<music.duration){music.currentTime=saved;}
+}
+async function playMusic(){
+ try{await music.play();sessionStorage.setItem(PLAY_KEY,"yes");}
+ catch(error){/* Browser autoplay block korle first click/tap-e start hobe */}
+}
+music.addEventListener("loadedmetadata",()=>{restoreMusicTime();playMusic();});
+if(music.readyState>=1){restoreMusicTime();}
+playMusic();
+
+function saveMusicPosition(){
+ if(!music.paused){sessionStorage.setItem(PLAY_KEY,"yes");}
+ sessionStorage.setItem(TIME_KEY,String(music.currentTime||0));
+}
+window.addEventListener("pagehide",saveMusicPosition);
+function resumeOnInteraction(){if(music.paused){playMusic();}}
+document.addEventListener("pointerdown",resumeOnInteraction,{once:true});
+document.addEventListener("keydown",resumeOnInteraction,{once:true});
+
+/* MEDIUM-FAST LETTER-BY-LETTER TYPING */
+const lines=document.querySelectorAll(".message");
+const typingSpeed=32;
+const pauseBetweenLines=500;
+const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+
+async function typeLine(element,text){
+ if(!text.trim())return;
+ const cursor=document.createElement("span");
+ cursor.className="cursor";
+ element.appendChild(cursor);
+ for(const character of text){
+  element.insertBefore(document.createTextNode(character),cursor);
+  await wait(typingSpeed);
+ }
+ cursor.remove();
+}
+async function startTyping(){
+ await wait(900);
+ for(const line of lines){
+  const text=line.dataset.text||"";
+  if(text.trim()){await typeLine(line,text);await wait(pauseBetweenLines);}
+ }
+}
+window.addEventListener("load",startTyping);
+</script>
+</body>
+</html>
